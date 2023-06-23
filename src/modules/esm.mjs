@@ -1,19 +1,21 @@
-import path, { dirname } from 'node:path';
+import path from 'node:path';
 import { createServer as createServerHttp } from 'node:http';
 import { release, version } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import './files/c.js';
+import { createRequire } from 'node:module';
 
 const __dirname = fileURLToPath(import.meta.url);
 const __filename = fileURLToPath(new URL('.', import.meta.url));
+const require = createRequire(import.meta.url);
 const random = Math.random();
 
 let unknownObject;
 
 if (random > 0.5) {
-    unknownObject = dirname(fileURLToPath(import.meta.url)) + '/files/a.json';
+    unknownObject = require('./files/a.json');
 } else {
-    unknownObject = dirname(fileURLToPath(import.meta.url)) + '/files/b.json';
+    unknownObject = require('./files/b.json');
 }
 
 console.log(`Release ${release()}`);
