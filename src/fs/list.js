@@ -8,9 +8,12 @@ const list = async () => {
 
     try {
         const files = await readdir(pathToFile);
+        // ex1
         for (const file of files) {
             console.log(parse(file).name);
         }
+        // ex2
+        // console.table(files);
     } catch (err) {
         throw new Error(msgErr);
     }
